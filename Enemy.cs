@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
 
 
     public void Damaged(int d){
+        if(nowHp <= 0) return;
         nowHp -= d;
 
         if(nowHp <= 0){
@@ -52,7 +53,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void Die(){
-        spawnerObj._Respawn_monster(this.num); 
+        spawnerObj.Insert_monsterPool(this.num);
     }
 
     // Start is called before the first frame update

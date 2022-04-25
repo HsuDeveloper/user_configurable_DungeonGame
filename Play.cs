@@ -12,6 +12,7 @@ public class Play : MonoBehaviour
     public Dropdown atk_set;
     public Image monster_img;
     public Text info;
+    public int monster_num;
     public string monster;
     public int rate_hp;
     public int rate_atk;
@@ -40,6 +41,7 @@ public class Play : MonoBehaviour
 
     void monsterChange(){
         monster = monster_set.options[monster_set.value].text;
+        monster_num = monster_set.value;
     }
     void hpChange(){
         rate_hp = int.Parse(hp_set.options[hp_set.value].text.Substring(0,3));

@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
         get{return num;}
         set{num = value;}
     }
-
+    // to check working well
+    [SerializeField]
     private int maxHp;
     public int _maxHp{
         get{return maxHp;}
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
         get{return alive;}
         set{alive = value;}
     }
+    [SerializeField]
     private int atkDmg;
     public int _atkDmg{
         get{return atkDmg;}
@@ -59,15 +61,16 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(Play.instance == null){
-            maxHp = 50;
+        List<Dictionary<string,object>> data = CSVReader.Read("Monster_setting");
+        int monster_num = Play.instance.monster_num;
+        maxHp = (int)data[monster_num]["hp"];
+        nowHp = maxHp;
+        atkDmg = (int)data[monster_num]["atkDmg"];
+        
+        if(Play.instance != null){
+            maxHp *= (int)Mathf.Round(Play.instance.rate_hp * 0.01f);
             nowHp = maxHp;
-            atkDmg = 2;
-        }
-        else{
-            maxHp = (int)Mathf.Round(50 * (Play.instance.rate_hp * 0.01f));
-            nowHp = maxHp;
-            atkDmg = (int)Mathf.Round(2 * (Play.instance.rate_atk * 0.01f));
+            atkDmg *= (int)Mathf.Round(Play.instance.rate_atk * 0.01f);
         }
         
         animator = GetComponent<Animator>();

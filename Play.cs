@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class Play : MonoBehaviour
 {
+    AsyncOperationHandle handle;
     public Button play_btn;
     public Dropdown monster_set;
     public Dropdown hp_set;
     public Dropdown atk_set;
-    public Image monster_img;
+    [SerializeField] Image monster_img;
     public Text info;
     public int monster_num;
     public string monster;
@@ -37,11 +40,19 @@ public class Play : MonoBehaviour
 
     public void LoadGame (){
         SceneManager.LoadScene("main");
+        Addressables.Release(handle);
     }
 
     void monsterChange(){
         monster = monster_set.options[monster_set.value].text;
         monster_num = monster_set.value;
+
+        Addressables.LoadAssetAsync<Sprite>(monster).Completed +=
+        (AsyncOperationHandle<Sprite> Obj) =>
+        {
+            handle = Obj;
+            monster_img.sprite = Obj.Result;
+        };
     }
     void hpChange(){
         rate_hp = int.Parse(hp_set.options[hp_set.value].text.Substring(0,3));

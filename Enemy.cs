@@ -68,9 +68,9 @@ public class Enemy : MonoBehaviour
         atkDmg = (int)data[monster_num]["atkDmg"];
         
         if(Play.instance != null){
-            maxHp *= (int)Mathf.Round(Play.instance.rate_hp * 0.01f);
+            maxHp = (int)Mathf.Round(maxHp * Play.instance.rate_hp * 0.01f);
             nowHp = maxHp;
-            atkDmg *= (int)Mathf.Round(Play.instance.rate_atk * 0.01f);
+            atkDmg = (int)Mathf.Round(atkDmg * Play.instance.rate_atk * 0.01f);
         }
         
         animator = GetComponent<Animator>();

@@ -60,19 +60,7 @@ public class Enemy : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        List<Dictionary<string,object>> data = CSVReader.Read("Monster_setting");
-        int monster_num = Play.instance.monster_num;
-        maxHp = (int)data[monster_num]["hp"];
-        nowHp = maxHp;
-        atkDmg = (int)data[monster_num]["atkDmg"];
-        
-        if(Play.instance != null){
-            maxHp = (int)Mathf.Round(maxHp * Play.instance.rate_hp * 0.01f);
-            nowHp = maxHp;
-            atkDmg = (int)Mathf.Round(atkDmg * Play.instance.rate_atk * 0.01f);
-        }
-        
+    { 
         animator = GetComponent<Animator>();
 
         SetAttackSpeed(1.5f);
@@ -84,13 +72,6 @@ public class Enemy : MonoBehaviour
     {
         if(!alive) return;
         if(animator.GetBool("life") == false) animator.SetBool("life",true);
-        
-        if(transform.position.y > 0.3f ){
-            animator.SetBool("is_jump",true);
-            transform.Translate(Vector3.down * Time.deltaTime * 2);
-            return;
-        }
-        animator.SetBool("is_jump",false);
         
         if(transform.position.x > 0){
             animator.SetBool("is_moving",true);

@@ -13,7 +13,7 @@ public class Play : MonoBehaviour
     public Dropdown monster_set;
     public Dropdown hp_set;
     public Dropdown atk_set;
-    [SerializeField] Image monster_img;
+    public Image monster_preview;
     public Text info;
     public int monster_num;
     public string monster;
@@ -44,14 +44,14 @@ public class Play : MonoBehaviour
     }
 
     void monsterChange(){
-        monster = monster_set.options[monster_set.value].text;
         monster_num = monster_set.value;
+        monster = monster_set.options[monster_num].text;
 
-        Addressables.LoadAssetAsync<Sprite>(monster).Completed +=
+        Addressables.LoadAssetAsync<Sprite>(monster+ "_sprite").Completed +=
         (AsyncOperationHandle<Sprite> Obj) =>
         {
             handle = Obj;
-            monster_img.sprite = Obj.Result;
+            monster_preview.sprite = Obj.Result;
         };
     }
     void hpChange(){

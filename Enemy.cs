@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
 {
     public Spawn spawnerObj;
     private Animator animator;
+    public Animator _animator{
+        set{animator = value;}
+    }
     private int num;
     public int _num{
         get{return num;}
@@ -18,6 +21,7 @@ public class Enemy : MonoBehaviour
         get{return maxHp;}
         set{maxHp = value;}
     }
+    [SerializeField]
     private int nowHp;
     public int _nowHp{
         get{return nowHp;}
@@ -33,13 +37,6 @@ public class Enemy : MonoBehaviour
     public int _atkDmg{
         get{return atkDmg;}
         set{atkDmg = value;}
-    }
-    private float atkSpeed = 1;
-
-    void SetAttackSpeed(float speed)
-    {
-        animator.SetFloat("attackSpeed", speed);
-        atkSpeed = speed;
     }
 
 
@@ -61,10 +58,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        animator = GetComponent<Animator>();
-
-        SetAttackSpeed(1.5f);
-        
+        animator = GetComponent<Animator>();        
     }
 
     // Update is called once per frame

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public Enemy enemy;
+    public Enemy sword_man;
+    public Enemy oneEye_monster;
     private int population;
     Vector3 respawn_aria = new Vector3(2.3f,0.3f,0);
     Queue<int> unActive_pool;
@@ -13,15 +14,15 @@ public class Spawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        List<Dictionary<string,object>> data = CSVReader.Read("Monster_setting");
         population = 5;
         monster_pool = new Enemy[population];
         unActive_pool = new Queue<int>();
 
-        List<Dictionary<string,object>> data = CSVReader.Read("Monster_setting");
         int monster_num = Play.instance.monster_num;
 
         for(int i=0;i<population;i++){
-            Enemy monster = Instantiate(enemy);
+            Enemy monster = Instantiate(select_spawn_monster(monster_num));
             monster.spawnerObj = this;
             monster._num = i;
             monster._maxHp = (int)Mathf.Round((int)data[monster_num]["hp"] * Play.instance.rate_hp * 0.01f);
@@ -34,6 +35,17 @@ public class Spawn : MonoBehaviour
 
         StartCoroutine(Spawn_monster());
         StartCoroutine(Respawn_monster());
+    }
+
+    Enemy select_spawn_monster(int n){
+        switch(n){
+            case 0:
+            return sword_man;
+            case 1:
+            return oneEye_monster;
+        }
+        
+        return sword_man;
     }
 
     IEnumerator Spawn_monster(){

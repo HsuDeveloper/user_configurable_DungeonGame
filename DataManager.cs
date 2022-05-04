@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DataManager : MonoBehaviour
 {
@@ -16,7 +13,6 @@ public class DataManager : MonoBehaviour
             return _instance;
         }
     }
-    AsyncOperationHandle handle;
         private int _monster_num;
         public int monster_num{
             get{ return _monster_num;}
@@ -50,15 +46,10 @@ public class DataManager : MonoBehaviour
 
     public void LoadGame (){
         SceneManager.LoadScene("main");
-        Addressables.Release(handle);
     }
     public void StartScene(){
         SceneManager.LoadScene("start");
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 }

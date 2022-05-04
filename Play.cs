@@ -49,6 +49,7 @@ public class Play : MonoBehaviour
 
         start_btn.onClick.AddListener(delegate{
             DataManager.instance.LoadGame();
+            Addressables.Release(handle);
         });
 
         monster_set.onValueChanged.AddListener(delegate{

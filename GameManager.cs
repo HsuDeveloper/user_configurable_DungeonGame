@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         continue_btn.onClick.AddListener(delegate{
-
+            Time.timeScale=1;
         });
         
         exit_btn.onClick.AddListener(delegate{
+            Time.timeScale=1;
              DataManager.instance.StartScene();
         });
     }
@@ -25,8 +26,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if(Input.GetButton("Cancel")){
-            if(submenu.activeSelf) submenu.SetActive(false);
-            else submenu.SetActive(true);
+            if(submenu.activeSelf) {
+                Time.timeScale=1;
+                submenu.SetActive(false);
+            }
+            else {
+                Time.timeScale=0;
+                submenu.SetActive(true);
+            }
         }
     }
 }

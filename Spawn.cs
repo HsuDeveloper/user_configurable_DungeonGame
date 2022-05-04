@@ -19,15 +19,15 @@ public class Spawn : MonoBehaviour
         monster_pool = new Enemy[population];
         unActive_pool = new Queue<int>();
 
-        int monster_num = Play.instance.monster_num;
+        int monster_num = DataManager.instance.monster_num;
 
         for(int i=0;i<population;i++){
             Enemy monster = Instantiate(select_spawn_monster(monster_num));
             monster.spawnerObj = this;
             monster._num = i;
-            monster._maxHp = (int)Mathf.Round((int)data[monster_num]["hp"] * Play.instance.rate_hp * 0.01f);
+            monster._maxHp = (int)Mathf.Round((int)data[monster_num]["hp"] * DataManager.instance.rate_hp * 0.01f);
             monster._nowHp = monster._maxHp;
-            monster._atkDmg = (int)Mathf.Round((int)data[monster_num]["atkDmg"] * Play.instance.rate_atk * 0.01f);
+            monster._atkDmg = (int)Mathf.Round((int)data[monster_num]["atkDmg"] * DataManager.instance.rate_atk * 0.01f);
             monster.transform.position = respawn_aria;
             monster.gameObject.SetActive(false);
             monster_pool[i] = monster;

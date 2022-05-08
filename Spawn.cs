@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public Enemy sword_man;
-    public Enemy oneEye_monster;
+    public GameObject sword_man;
+    public GameObject oneEye_monster;
+    public GameObject goblin;
+    public GameObject mushroom;
     private int population;
     Vector3 respawn_aria = new Vector3(2.3f,0.3f,0);
     Queue<int> unActive_pool;
@@ -14,7 +16,7 @@ public class Spawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<Dictionary<string,object>> data = CSVReader.Read("Monster_setting");
+        List<Dictionary<string,object>> data = CSVReader.Read("Monster_info");
         population = 5;
         monster_pool = new Enemy[population];
         unActive_pool = new Queue<int>();
@@ -22,27 +24,32 @@ public class Spawn : MonoBehaviour
         int monster_num = DataManager.instance.monster_num;
 
         for(int i=0;i<population;i++){
-            Enemy monster = Instantiate(select_spawn_monster(monster_num));
-            monster.spawnerObj = this;
-            monster._num = i;
-            monster._maxHp = (int)Mathf.Round((int)data[monster_num]["hp"] * DataManager.instance.rate_hp * 0.01f);
-            monster._nowHp = monster._maxHp;
-            monster._atkDmg = (int)Mathf.Round((int)data[monster_num]["atkDmg"] * DataManager.instance.rate_atk * 0.01f);
-            monster.transform.position = respawn_aria;
-            monster.gameObject.SetActive(false);
-            monster_pool[i] = monster;
+            GameObject monster = Instantiate(select_spawn_monster(monster_num));
+            Enemy monster_state = monster.GetComponent<Enemy>();
+            monster_state.spawnerObj = this;
+            monster_state._num = i;
+            monster_state._maxHp = (int)Mathf.Round((int)data[monster_num]["hp"] * DataManager.instance.rate_hp * 0.01f);
+            monster_state._nowHp = monster_state._maxHp;
+            monster_state._atkDmg = (int)Mathf.Round((int)data[monster_num]["atkDmg"] * DataManager.instance.rate_atk * 0.01f);
+            monster_state.transform.position = respawn_aria;
+            monster_state.gameObject.SetActive(false);
+            monster_pool[i] = monster_state;
         }
 
         StartCoroutine(Spawn_monster());
         StartCoroutine(Respawn_monster());
     }
 
-    Enemy select_spawn_monster(int n){
+    GameObject select_spawn_monster(int n){
         switch(n){
             case 0:
             return sword_man;
             case 1:
             return oneEye_monster;
+            case 2:
+            return goblin;
+            case 3:
+            return mushroom;
         }
         
         return sword_man;

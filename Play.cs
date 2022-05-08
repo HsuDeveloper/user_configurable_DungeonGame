@@ -26,7 +26,7 @@ public class Play : MonoBehaviour
         DataManager.instance.monster_num = monster_num;
         DataManager.instance.monster = monster;
 
-        Addressables.LoadAssetAsync<Sprite>(monster+ "_sprite").Completed +=
+        Addressables.LoadAssetAsync<Sprite>(monster+ "_preview").Completed +=
         (AsyncOperationHandle<Sprite> Obj) =>
         {
             handle = Obj;

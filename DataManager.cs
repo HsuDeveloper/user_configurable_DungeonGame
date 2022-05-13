@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
 public class DataManager : MonoBehaviour
 {
 
@@ -13,26 +16,38 @@ public class DataManager : MonoBehaviour
             return _instance;
         }
     }
-        private int _monster_num;
-        public int monster_num{
-            get{ return _monster_num;}
-            set{ _monster_num = value;}
-        }
-        private string _monster;
-        public string monster{
-            get{ return _monster;}
-            set{ _monster = value;}
-        }
-        private int _rate_hp;
-        public int rate_hp{
-            get{ return _rate_hp;}
-            set{ _rate_hp = value;}
-        }
-        private int _rate_atk;
-        public int rate_atk{
-            get{ return _rate_atk;}
-            set{ _rate_atk = value;}
-        }
+
+    private GameObject _monster_pref;
+    public GameObject monster_pref{
+        get{return _monster_pref;}
+        set{_monster_pref = value;}
+    }
+    private AsyncOperationHandle _monster_pref_handle;
+    public AsyncOperationHandle monster_pref_handle{
+        get{return _monster_pref_handle;}
+        set{_monster_pref_handle = value;}
+    }
+
+    private int _monster_num;
+    public int monster_num{
+        get{ return _monster_num;}
+        set{ _monster_num = value;}
+    }
+    private string _monster;
+    public string monster{
+        get{ return _monster;}
+        set{ _monster = value;}
+    }
+    private int _rate_hp;
+    public int rate_hp{
+        get{ return _rate_hp;}
+        set{ _rate_hp = value;}
+    }
+    private int _rate_atk;
+    public int rate_atk{
+        get{ return _rate_atk;}
+        set{ _rate_atk = value;}
+    }
 
     void Awake(){
         if(_instance == null){
@@ -49,6 +64,7 @@ public class DataManager : MonoBehaviour
     }
     public void StartScene(){
         SceneManager.LoadScene("start");
+        Addressables.Release(monster_pref_handle);
     }
     // Start is called before the first frame update
 

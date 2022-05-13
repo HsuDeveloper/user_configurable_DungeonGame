@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public GameObject sword_man;
-    public GameObject oneEye_monster;
-    public GameObject goblin;
-    public GameObject mushroom;
+    GameObject selected_monster;
+
     private int population;
     Vector3 respawn_aria = new Vector3(2.3f,0.3f,0);
     Queue<int> unActive_pool;
@@ -23,8 +21,10 @@ public class Spawn : MonoBehaviour
 
         int monster_num = DataManager.instance.monster_num;
 
+        selected_monster = DataManager.instance.monster_pref;
+
         for(int i=0;i<population;i++){
-            GameObject monster = Instantiate(select_spawn_monster(monster_num));
+            GameObject monster = Instantiate(selected_monster);
             Enemy monster_state = monster.GetComponent<Enemy>();
             monster_state.spawnerObj = this;
             monster_state._num = i;
@@ -38,21 +38,6 @@ public class Spawn : MonoBehaviour
 
         StartCoroutine(Spawn_monster());
         StartCoroutine(Respawn_monster());
-    }
-
-    GameObject select_spawn_monster(int n){
-        switch(n){
-            case 0:
-            return sword_man;
-            case 1:
-            return oneEye_monster;
-            case 2:
-            return goblin;
-            case 3:
-            return mushroom;
-        }
-        
-        return sword_man;
     }
 
     IEnumerator Spawn_monster(){

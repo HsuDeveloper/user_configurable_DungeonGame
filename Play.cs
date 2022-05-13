@@ -32,6 +32,15 @@ public class Play : MonoBehaviour
             handle = Obj;
             monster_preview.sprite = Obj.Result;
         };
+
+        Addressables.LoadAssetAsync<GameObject>(monster+ "_pref").Completed +=
+        (AsyncOperationHandle<GameObject> Obj) =>
+        {
+            DataManager.instance.monster_pref_handle = Obj;
+            DataManager.instance.monster_pref = Obj.Result;
+        };
+
+
     }
     void hpChange(){
         rate_hp = int.Parse(hp_set.options[hp_set.value].text.Substring(0,3));

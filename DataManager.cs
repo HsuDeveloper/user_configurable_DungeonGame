@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -60,10 +59,10 @@ public class DataManager : MonoBehaviour
     }
 
     public void LoadGame (){
-        SceneManager.LoadScene("main");
+        Loading.LoadScene("main");
     }
     public void StartScene(){
-        SceneManager.LoadScene("start");
+        Loading.LoadScene("start");
         Addressables.Release(monster_pref_handle);
     }
     // Start is called before the first frame update

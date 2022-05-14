@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        continue_btn.onClick.AddListener(delegate{
+        continue_btn.onClick.AddListener(delegate
+        {
             Time.timeScale=1;
         });
         
-        exit_btn.onClick.AddListener(delegate{
+        exit_btn.onClick.AddListener(delegate
+        {
             Time.timeScale=1;
              DataManager.instance.StartScene();
         });
@@ -25,12 +27,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButton("Cancel")){
-            if(submenu.activeSelf) {
+        if(Input.GetButton("Cancel"))
+        {
+            if(submenu.activeSelf) 
+            {
                 Time.timeScale=1;
                 submenu.SetActive(false);
             }
-            else {
+            else 
+            {
                 Time.timeScale=0;
                 submenu.SetActive(true);
             }

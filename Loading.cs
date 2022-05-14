@@ -11,15 +11,18 @@ public class Loading : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(nextScene == null) nextScene = "start";
         StartCoroutine(LoadScene());
     }
 
-    public static void LoadScene(string sceneName){
+    public static void LoadScene(string sceneName)
+    {
         nextScene = sceneName;
         SceneManager.LoadScene("loading");
     }
 
-    IEnumerator LoadScene(){
+    IEnumerator LoadScene()
+    {
         yield return null;
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         op.allowSceneActivation = false;

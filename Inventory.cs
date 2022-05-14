@@ -9,7 +9,8 @@ public class Inventory : MonoBehaviour
     {
         List<Dictionary<string,object>> data = CSVReader.Read("inventory");
 
-        for(int i=0;i<data.Count;i++){
+        for(int i=0;i<data.Count;i++)
+        {
             
         }
     }

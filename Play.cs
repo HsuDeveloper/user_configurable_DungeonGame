@@ -19,7 +19,8 @@ public class Play : MonoBehaviour
     private int rate_hp;
     private int rate_atk;
 
-    void monsterChange(){
+    void monsterChange()
+    {
         monster_num = monster_set.value;
         monster = monster_set.options[monster_num].text;
 
@@ -42,32 +43,39 @@ public class Play : MonoBehaviour
 
 
     }
-    void hpChange(){
+    void hpChange()
+    {
         rate_hp = int.Parse(hp_set.options[hp_set.value].text.Substring(0,3));
         DataManager.instance.rate_hp = rate_hp;
     }
-    void atkChange(){
+    void atkChange()
+    {
         rate_atk = int.Parse(atk_set.options[atk_set.value].text.Substring(0,3));
         DataManager.instance.rate_atk = rate_atk;
     }
 
-    void Start(){
+    void Start()
+    {
         monsterChange();
         hpChange();
         atkChange();
 
-        start_btn.onClick.AddListener(delegate{
+        start_btn.onClick.AddListener(delegate
+        {
             DataManager.instance.LoadGame();
             Addressables.Release(handle);
         });
 
-        monster_set.onValueChanged.AddListener(delegate{
+        monster_set.onValueChanged.AddListener(delegate
+        {
             monsterChange();
         });
-        hp_set.onValueChanged.AddListener(delegate{
+        hp_set.onValueChanged.AddListener(delegate
+        {
             hpChange();
         });
-        atk_set.onValueChanged.AddListener(delegate{
+        atk_set.onValueChanged.AddListener(delegate
+        {
             atkChange();
         });
     }

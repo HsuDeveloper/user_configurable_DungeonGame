@@ -26,7 +26,8 @@ public class Character : MonoBehaviour
         atkSpeed = speed;
     }
 
-    void switchWeapon(int wr){
+    void switchWeapon(int wr)
+    {
         weaponCollider.enabled=false;
 
         switch(wr){
@@ -67,21 +68,26 @@ public class Character : MonoBehaviour
     {
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(weaponCollider.transform.position,weaponCollider.transform.localScale,0);
         
-        if(collider2Ds.Length>1){
+        if(collider2Ds.Length>1)
+        {
             if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Character_attack")&&!animator.GetCurrentAnimatorStateInfo(0).IsName("Character_attack2")){
 
-                if(atkPos == 0){
+                if(atkPos == 0)
+                {
                     animator.SetTrigger("attack_1");
                     atkPos = 1; 
                     
                 }
-                else if(atkPos ==1){
+                else if(atkPos ==1)
+                {
                     animator.SetTrigger("attack_2");
                     atkPos = 0;
                 }
 
-                foreach(Collider2D collider in collider2Ds){
-                        if(collider.tag == "Enemy"){
+                foreach(Collider2D collider in collider2Ds)
+                {
+                        if(collider.tag == "Enemy")
+                        {
                             collider.GetComponent<Enemy>().Damaged(atkDmg);
                         }
                     }

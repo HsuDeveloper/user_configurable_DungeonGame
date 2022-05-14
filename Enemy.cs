@@ -6,52 +6,61 @@ public class Enemy : MonoBehaviour
 {
     public Spawn spawnerObj;
     private Animator animator;
-    public Animator _animator{
+    public Animator _animator
+    {
         set{animator = value;}
     }
     private int num;
-    public int _num{
+    public int _num
+    {
         get{return num;}
         set{num = value;}
     }
     // to check working well
     [SerializeField]
     private int maxHp;
-    public int _maxHp{
+    public int _maxHp
+    {
         get{return maxHp;}
         set{maxHp = value;}
     }
     [SerializeField]
     private int nowHp;
-    public int _nowHp{
+    public int _nowHp
+    {
         get{return nowHp;}
         set{nowHp = value;}
     }
     private bool alive=true;
-    public bool _alive{
+    public bool _alive
+    {
         get{return alive;}
         set{alive = value;}
     }
     [SerializeField]
     private int atkDmg;
-    public int _atkDmg{
+    public int _atkDmg
+    {
         get{return atkDmg;}
         set{atkDmg = value;}
     }
 
 
-    public void Damaged(int d){
+    public void Damaged(int d)
+    {
         if(nowHp <= 0) return;
         nowHp -= d;
 
-        if(nowHp <= 0){
+        if(nowHp <= 0)
+        {
             animator.SetBool("life",false);
             alive=false;
             Die();
         }
     }
 
-    public void Die(){
+    public void Die()
+    {
         spawnerObj.Insert_monsterPool(this.num);
     }
 
@@ -67,13 +76,16 @@ public class Enemy : MonoBehaviour
         if(!alive) return;
         if(animator.GetBool("life") == false) animator.SetBool("life",true);
         
-        if(transform.position.x > 0){
+        if(transform.position.x > 0)
+        {
             animator.SetBool("is_moving",true);
             transform.Translate(Vector3.left * Time.deltaTime);
         }
-        else{
+        else
+        {
             animator.SetBool("is_moving",false);
-            if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")){
+            if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
                 animator.SetTrigger("attack");
             }
         }  

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Item : MonoBehaviour
+public class Item : ScriptableObject
 {
-    public string itemName;
-    public Sprite itemImage;
+    public int num;
+    public int type;
+    public Sprite itemImg;
 
-    public Item(string _itemName,string _itemImage){
-        itemName = _itemName;
-        
+    public Item(int _num, int _type,Sprite _itemImg){
+        num = _num;
+        type = _type;
+        itemImg = _itemImg;
     }
 }

@@ -11,15 +11,18 @@ public class ItemSlot : MonoBehaviour
     {
         get{return _item;}
         set{
+            _item = value;
             if(_item != null)
             {
-                image.sprite = _item.itemImage;
+                image.sprite = _item.itemImg;
                 image.color = new Color(1,1,1,1);
+                image.preserveAspect = true;
             }
             else
             {
                 image.color = new Color(1,1,1,0);
             }
+        
         }
     }
     

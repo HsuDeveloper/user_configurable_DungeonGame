@@ -9,6 +9,14 @@ public class DataManager : MonoBehaviour
 {
 
     private static DataManager _instance;
+    private GameObject _monster_pref;
+    private AsyncOperationHandle _monster_pref_handle;
+    private int _monster_num;
+    private string _monster;
+    private int _rate_hp;
+    private int _rate_atk;
+    private int _weapon;
+
     public static DataManager instance
     {
         get
@@ -17,45 +25,47 @@ public class DataManager : MonoBehaviour
             return _instance;
         }
     }
-
-    private GameObject _monster_pref;
+    
     public GameObject monster_pref
     {
         get{return _monster_pref;}
         set{_monster_pref = value;}
     }
-    private AsyncOperationHandle _monster_pref_handle;
+    
     public AsyncOperationHandle monster_pref_handle
     {
         get{return _monster_pref_handle;}
         set{_monster_pref_handle = value;}
     }
-
-    private int _monster_num;
+    
     public int monster_num
     {
         get{ return _monster_num;}
         set{ _monster_num = value;}
     }
-    private string _monster;
+    
     public string monster
     {
         get{ return _monster;}
         set{ _monster = value;}
     }
-    private int _rate_hp;
+    
     public int rate_hp
     {
         get{ return _rate_hp;}
         set{ _rate_hp = value;}
     }
-    private int _rate_atk;
+    
     public int rate_atk
     {
         get{ return _rate_atk;}
         set{ _rate_atk = value;}
     }
-
+    public int weapon
+    {
+        get{return _weapon;}
+        set{_weapon = value;}
+    }
     void Awake()
     {
         if(_instance == null)

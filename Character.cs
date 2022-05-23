@@ -11,9 +11,11 @@ public class Character : MonoBehaviour
     public int nowHp;
     public int atkDmg;
     public int atkPos = 0;
-    public int weapon;
     public int weaponRange;
+    [SerializeField] GameObject[] weapons;
+    private int weapon = 0;
     public float atkSpeed = 1;
+    public bool start_flag = false;
 
     BoxCollider2D weaponCollider;
     public BoxCollider2D weaponRange1;
@@ -26,7 +28,7 @@ public class Character : MonoBehaviour
         atkSpeed = speed;
     }
 
-    void switchWeapon(int wr)
+    void switchWeapon_range(int wr)
     {
         weaponCollider.enabled=false;
 
@@ -46,17 +48,21 @@ public class Character : MonoBehaviour
 
     }
 
+    public void switchWeapon(int w){
+        weapons[weapon].SetActive(false);
+        weapons[w].SetActive(true);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         maxHp = 100;
         nowHp = 100;
         atkDmg = 10;
+
         weaponCollider = weaponRange1;
 
-        switchWeapon(1);
-
-        transform.position = new Vector3(-1.5f,0.3f,0);
+        switchWeapon_range(1);
         
         animator = GetComponent<Animator>();
 

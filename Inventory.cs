@@ -5,20 +5,13 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public List<Item> items;
+    [SerializeField] Sprite[] itemImgs;
 
     [SerializeField]
     private Transform slotParent;
     [SerializeField]
     private ItemSlot[] slots;
 
-    private void OnValidate()
-    {
-        slots = slotParent.GetComponentsInChildren<ItemSlot>();
-    }
-    void Awake()
-    {
-        FreshSlot();
-    }
     public void FreshSlot()
     {
         int i = 0;
@@ -42,14 +35,16 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        slots = slotParent.GetComponentsInChildren<ItemSlot>();
+
         List<Dictionary<string,object>> data = CSVReader.Read("inventory");
 
         for(int i=0;i<data.Count;i++)
         {
-            items.Add(new Item((string)data[i]["item_name"] , (string)data[i]["item_sprite"]));
+            Sprite itemImg = itemImgs[(int)data[i]["item_num"]];
+            AddItem(new Item((int)data[i]["item_num"] , (int)data[i]["item_type"],itemImg));
         }
 
-        FreshSlot();
     }
 
 }

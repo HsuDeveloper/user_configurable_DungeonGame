@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     public int maxHp;
     public int nowHp;
     public int atkDmg;
+    public int weaponDmg;
     public int atkPos = 0;
     public int weaponRange;
     [SerializeField] GameObject[] weapons;
@@ -48,17 +49,27 @@ public class Character : MonoBehaviour
 
     }
 
-    public void switchWeapon(int w){
+    public void switchWeapon(int w, int dmg)
+    {
+        atkDmg -= weaponDmg;
+        atkDmg += dmg;
         weapons[weapon].SetActive(false);
         weapons[w].SetActive(true);
+        weapon = w;
+        weaponDmg = dmg;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        List<Dictionary<string,object>> data = CSVReader.Read("Character_info");
+        weapon = (int)data[0]["weapon"];
+        weapons[weapon].SetActive(true);
         maxHp = 100;
         nowHp = 100;
         atkDmg = 10;
+        weaponDmg = (int)DataManager.instance.inventory.data[weapon]["item_dmg"];
+        atkDmg += weaponDmg;
 
         weaponCollider = weaponRange1;
 

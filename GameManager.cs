@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         exit_btn.onClick.AddListener(delegate
         {
             Time.timeScale=1;
-             DataManager.instance.StartScene();
+            DataManager.instance.StartScene();
         });
     }
 

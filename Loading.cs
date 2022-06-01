@@ -11,6 +11,7 @@ public class Loading : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(DataManager.instance != null) DataManager.instance.datamanager.SetActive(false);
         if(nextScene == null) nextScene = "start";
         StartCoroutine(LoadScene());
     }
@@ -26,7 +27,7 @@ public class Loading : MonoBehaviour
         yield return null;
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         op.allowSceneActivation = false;
-
+    
         float timer = 0.0f;
         while(!op.isDone)
         {
@@ -48,6 +49,7 @@ public class Loading : MonoBehaviour
                 if(progressBar.fillAmount == 1.0f)
                 {
                     op.allowSceneActivation = true;
+                    if(DataManager.instance != null) DataManager.instance.datamanager.SetActive(true);
                     yield break;
                 }
             }

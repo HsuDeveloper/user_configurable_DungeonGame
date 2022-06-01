@@ -55,7 +55,7 @@ public class Play : MonoBehaviour
     }
 
     void Start()
-    {
+    {        
         monsterChange();
         hpChange();
         atkChange();

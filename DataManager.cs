@@ -7,7 +7,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DataManager : MonoBehaviour
 {
-
+    public GameObject datamanager;
+    public Character character;
+    public Inventory inventory;
     private static DataManager _instance;
     private GameObject _monster_pref;
     private AsyncOperationHandle _monster_pref_handle;
@@ -66,6 +68,7 @@ public class DataManager : MonoBehaviour
         get{return _weapon;}
         set{_weapon = value;}
     }
+
     void Awake()
     {
         if(_instance == null)

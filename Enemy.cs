@@ -5,40 +5,48 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Spawn spawnerObj;
+    public BoxCollider2D collider;
     private Animator animator;
+    private int num;
+    private int maxHp;
+    // to check working well
+    [SerializeField]
+    private int nowHp;
+    [SerializeField]
+    private bool alive=true;
+    [SerializeField]
+    private int atkDmg;
     public Animator _animator
     {
         set{animator = value;}
     }
-    private int num;
+    
     public int _num
     {
         get{return num;}
         set{num = value;}
     }
-    // to check working well
-    [SerializeField]
-    private int maxHp;
+    
+    
     public int _maxHp
     {
         get{return maxHp;}
         set{maxHp = value;}
     }
-    [SerializeField]
-    private int nowHp;
+    
+    
     public int _nowHp
     {
         get{return nowHp;}
         set{nowHp = value;}
     }
-    private bool alive=true;
+    
     public bool _alive
     {
         get{return alive;}
         set{alive = value;}
     }
-    [SerializeField]
-    private int atkDmg;
+    
     public int _atkDmg
     {
         get{return atkDmg;}
@@ -67,7 +75,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        animator = GetComponent<Animator>();        
+        animator = GetComponent<Animator>();
+        // collider = GetComponent<Collider2D>();        
     }
 
     // Update is called once per frame

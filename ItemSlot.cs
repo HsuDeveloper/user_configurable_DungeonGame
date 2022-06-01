@@ -25,5 +25,10 @@ public class ItemSlot : MonoBehaviour
         
         }
     }
+
+    public void equip()
+    {
+        DataManager.instance.character.switchWeapon(_item.num, _item.dmg);
+    }
     
 }
